@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import Square from "./components/Square";
+import Board from "./components/Board";
 
 function App() {
-  const [value, setValue] = useState<"X" | "O" | null>(null);
+  const [squares, setSquares] = useState<( "X" | "O" | null )[]>(Array(9).fill(null));
 
-  return (
-    <div>
-      <Square value={value} onClick={() => setValue("X")} />
-    </div>
-  );
+  function handleClick(i: number) {
+    const newSquares = squares.slice();
+    newSquares[i] = "X";
+    setSquares(newSquares);
+  }
+
+  return <Board squares={squares} onClick={handleClick} />;
 }
 
 export default App;
