@@ -1,22 +1,24 @@
 import React from "react";
+import "./Square.css";
 
 type SquareProps = {
   value: "X" | "O" | null;
   onClick: () => void;
+  isWinning?: boolean;
 };
 
-const Square: React.FC<SquareProps> = ({ value, onClick }) => {
+const Square: React.FC<SquareProps> = ({ value, onClick, isWinning = false }) => {
   return (
     <button
-      style={{
-        width: "60px",
-        height: "60px",
-        fontSize: "24px",
-        margin: "5px",
-      }}
+      className={`square ${value ? 'filled' : ''} ${isWinning ? 'winning' : ''}`}
       onClick={onClick}
+      disabled={!!value}
     >
-      {value}
+      {value && (
+        <span className={`symbol ${value.toLowerCase()}`}>
+          {value}
+        </span>
+      )}
     </button>
   );
 };
